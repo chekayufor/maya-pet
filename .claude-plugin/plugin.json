@@ -1,0 +1,6 @@
+{
+  "name": "maya",
+  "version": "0.1.0",
+  "description": "Майя: animated pet above the prompt that reacts to what Claude is doing",
+  "types": "./types/index.d.ts"
+}

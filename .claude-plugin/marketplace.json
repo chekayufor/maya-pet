@@ -1,0 +1,6 @@
+{
+  "name": "maya-pet",
+  "description": "Майя: animated pet for Claude Code",
+  "owner": { "name": "maya-pet" },
+  "plugins": [{ "name": "maya", "source": "./" }]
+}

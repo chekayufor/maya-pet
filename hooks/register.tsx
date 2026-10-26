@@ -53,6 +53,8 @@ const ASKS = new Set(['AskUserQuestion', 'ExitPlanMode'])
 const IDLE_LOOK_AFTER_MS = 20_000
 // The desktop app's loader word while it has no step to name.
 const IDLE_WORDS = new Set(['Working', ''])
+// Maya's width in the loader, in CSS pixels (72 above the prompt).
+const LOADER_WIDTH = 64
 
 const lengthOf = (anim: MayaAnim) => STRIPS[anim].durations.reduce((sum: number, d: number) => sum + d, 0)
 
@@ -221,11 +223,11 @@ export const register: Register = on => {
     const l = await read($, lang)
     const caption = CAPTIONS[l][p.anim]
     const step = e.props.message ?? (IDLE_WORDS.has(e.props.word) ? undefined : e.props.word)
-    const width = FRAME_W / 3
+    const height = Math.round((LOADER_WIDTH * FRAME_H) / FRAME_W)
 
     return (
       <Box flexDirection="row" alignItems="center" gap={1}>
-        <Svg source={svgFor(p, width)} alt={`${NAME[l]}: ${caption}`} width={width} height={Math.round(FRAME_H / 3)} />
+        <Svg source={svgFor(p, LOADER_WIDTH)} alt={`${NAME[l]}: ${caption}`} width={LOADER_WIDTH} height={height} />
         <Box flexDirection="column">
           <Text dimColor dir={l === 'he' ? 'rtl' : 'ltr'}>{caption}</Text>
           {step !== undefined && <Text dimColor>{step}{e.props.suffix}</Text>}

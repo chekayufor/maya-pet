@@ -92,7 +92,10 @@ test('on the desktop the loader is Maya, and the band steps aside while a turn r
   await $.session.start({ cwd: '/', surface: 'desktop', isInteractive: true })
 
   const loader = await $.ui.mount({ ...SPINNER, surface: 'desktop' })
-  expect((await loader.find({ type: 'Svg' }))?.type).toBe('Svg')
+  const small = await loader.find({ type: 'Svg' })
+  expect(small?.type).toBe('Svg')
+  expect(small?.props.width).toBe(64)
+  expect(small?.props.height).toBe(69)
   expect((await loader.find({ type: 'Text', text: /notes\.md/ }))?.text).toBe('Creating notes.md…')
   await loader.unmount()
 
